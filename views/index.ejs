@@ -20,12 +20,17 @@
       </div>
     </div>
     
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 
     <script>
       function progressBarLoop(){
         let progressBar = document.getElementById("playerLine")
         var progressBarsquare = document.getElementById("square");
+        progressBar.addEventListener('click', function(event){
+            var thisClickoffSet = $(this).offset();
+            // console.log(thisClickoffSet)
+        })
         setInterval(function() {
           if(player == null || progressBar == null) {
             return;
