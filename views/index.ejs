@@ -1,17 +1,48 @@
 <!DOCTYPE html>
 <html>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+
   <body>
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
+    <div id="playerController">
+      <button type="button" class="btn btn-default" aria-label="Left Align">
+        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="btn btn-default" aria-label="Left Align">
+        <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+      </button>
+      <div id="playerLine">
+        <div id="line"></div>
+        <div id="square"></div>
+      </div>
+    </div>
+    
+
+
+    <script>
+      function progressBarLoop(){
+        let progressBar = document.getElementById("playerLine")
+        var progressBarsquare = document.getElementById("square");
+        setInterval(function() {
+          if(player == null || progressBar == null) {
+            return;
+          }
+          var fraction = player.getCurrentTime()/player.getDuration()*100;
+          document.getElementById("square").style.left = (fraction.toString() + "%");
+        }, 200)
+      }
+      // progressBarLoop();
+    </script>
 
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
-
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
       // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
       var player;
@@ -19,9 +50,14 @@
         player = new YT.Player('player', {
           height: '390',
           width: '640',
-          videoId: '5GFtYgFRkx4',
+          videoId: 'dmIFhpQe9Zk',
           playerVars: {
-            'playsinline': 1
+            'playsinline': 1,
+            'controls': 0,
+            'disablekb': 1,
+            'modestbranding': 1,
+            'rel': 0,
+            'showinfo': 0
           },
           events: {
             'onReady': onPlayerReady,
@@ -29,17 +65,17 @@
           }
         });
       }
-
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
-        event.target.playVideo();
+      progressBarLoop();
+      event.target.playVideo();
       }
-
       // 5. The API calls this function when the player's state changes.
       //    The function indicates that when playing a video (state=1),
       //    the player should play for six seconds and then stop.
       var done = false;
       function onPlayerStateChange(event) {
+        console.log(event.data)
         if (event.data == YT.PlayerState.PLAYING && !done) {
           setTimeout(stopVideo, 6000);
           done = true;
