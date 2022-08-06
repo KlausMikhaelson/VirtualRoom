@@ -45,8 +45,12 @@
   function progressBarLoop() {
     let progressBar = document.getElementById("playerLine")
     var progressBarsquare = document.getElementById("square");
+    var videoLength = player.getDuration();
     progressBar.addEventListener('click', function (event) {
       var thisClickoffSet = $(this).offset();
+      var seekTo = (event.pageX - thisClickoffSet.left)/600*videoLength;
+      var mydata = { state: 'play', time: seekTo }
+      socket.emit('event', mydata)
       // console.log(thisClickoffSet)
     })
     setInterval(function () {
@@ -114,6 +118,9 @@
   function pauseVideo(){
     player.pauseVideo();
   }
+  function seekTo(seconds) {
+    player.seekTo(seconds)
+  }
 </script>
 
 <!-- <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script> -->
@@ -121,6 +128,9 @@
   var socket = io('http://localhost:3001')
   socket.on('event', function(msg){
       if(msg.state == 'play'){
+        if(Math.abs(msg.time - player.getCurrentTime()) > 1){
+          seekTo(msg.time)
+        }
         playVideo();
       } else if(msg.state == 'pause'){
         pauseVideo();
