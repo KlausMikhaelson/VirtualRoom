@@ -18,8 +18,8 @@ server.listen(process.env.PORT || 3001, function(){
   });
 
 io.on("connection", function(socket) {
-    socket.on('playEvent', function(msg){
-        console.log(msg)
+    socket.on('event', function(msg){
+        io.emit('event', msg)
     })
     console.log("user conncted" + socket.id);
 })
