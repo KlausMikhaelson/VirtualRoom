@@ -101,10 +101,12 @@
   var playButton = $('#playVideo')
   var pauseButton = $('#pauseVideo')
   playButton.click(function(){
-    socket.emit('playEvent', 'play')
+    mydata = { state: 'play', time: player.getCurrentTime() };
+    socket.emit('playEvent', mydata)
   })
   pauseButton.click(function(){
-    socket.emit('playEvent', 'pause')
+    mydata = { state: 'pause', time: player.getCurrentTime() };
+    socket.emit('playEvent', mydata)
   })
 
 </script>
