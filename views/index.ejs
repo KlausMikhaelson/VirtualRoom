@@ -7,6 +7,11 @@
 
 <body>
   <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    
+  <div id="link-input">
+    <input type="url" id="youtubes" placeholder="paste the videoId">
+    <button id="link-Submit" onclick="playAnothervideo()" type="submit">submit</button>
+  </div>
   <div id="player"></div>
   <div id="playerController">
     <button id="playVideo" type="button" class="btn btn-default" aria-label="Left Align">
@@ -65,6 +70,7 @@
 </script>
 
 <script>
+
   // 2. This code loads the IFrame Player API code asynchronously.
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -72,8 +78,9 @@
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   // 3. This function creates an <iframe> (and YouTube player)
   //    after the API code downloads.
-  var player;
+  // var player;
   function onYouTubeIframeAPIReady() {
+    console.log("Api is ready")
     player = new YT.Player('player', {
       height: '390',
       width: '640',
@@ -91,6 +98,7 @@
       }
     });
   }
+  
   // 4. The API will call this function when the video player is ready.
   function onPlayerReady(event) {
     initliazeButtons();
@@ -105,7 +113,7 @@
     console.log(event.data)
     console.log(event.target.getCurrentTime());
     if (event.data == YT.PlayerState.PLAYING && !done) {
-      setTimeout(stopVideo, 60000);
+      setTimeout(stopVideo, 600000);
       done = true;
     }
   }
@@ -120,6 +128,36 @@
   }
   function seekTo(seconds) {
     player.seekTo(seconds)
+  }
+
+  var player;
+  function playThisvideo(vidId){
+    // var vidId = document.getElementById("youtubes").innerText
+    if(player){
+      player.destroy();
+    }
+    player = new YT.Player('player', {
+      height: '390',
+      width: '640',
+      videoId: vidId,
+      playerVars: {
+        'controls': 0,
+        'disablekb': 1,
+        'modestbranding': 1,
+        'rel': 0,
+        'showinfo': 0
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+
+  function playAnothervideo(){
+      var vidId = document.getElementById("youtubes").value;
+      playThisvideo(vidId);
   }
 </script>
 
