@@ -163,7 +163,7 @@
 
 <!-- <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script> -->
 <script>
-  var socket = io('http://localhost:3001')
+  var socket = io('https://guarded-meadow-15955.herokuapp.com')
   socket.on('event', function(msg){
       if(msg.state == 'play'){
         if(Math.abs(msg.time - player.getCurrentTime()) > 1){
