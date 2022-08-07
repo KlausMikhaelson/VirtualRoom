@@ -7,24 +7,33 @@
 
 <body>
   <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-    
-  <div id="link-input">
-    <input type="url" id="youtubes" placeholder="paste the videoId">
-    <button id="link-Submit" onclick="playAnothervideo()" type="submit">submit</button>
-  </div>
-  <div id="player"></div>
-  <div id="playerController">
-    <button id="playVideo" type="button" class="btn btn-default" aria-label="Left Align">
-      <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-    </button>
-    <button id="pauseVideo" type="button" class="btn btn-default" aria-label="Left Align">
-      <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
-    </button>
-    <div id="playerLine">
-      <div id="line"></div>
-      <div id="square"></div>
+    <div class="main-container">
+      <div class="side-container1">
+        <div id="link-input">
+          <input type="url" id="youtubes" placeholder="paste the videoId">
+          <button id="link-Submit" onclick="playAnothervideo()" type="submit">submit</button>
+        </div>
+        <div id="player"></div>
+        <div id="playerController">
+          <button id="playVideo" type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+          </button>
+          <button id="pauseVideo" type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+          </button>
+          <div id="playerLine">
+            <div id="line"></div>
+            <div id="square"></div>
+          </div>
+        </div>
+      </div>
+      <div class="Text-Feature">
+        <div id="message-container"></div>
+    <form id="send-container">
+      <input type="text" id="message-input">
+      <button type="submit" id="send-button">Send</button>
+      </div>
     </div>
-  </div>
 </body>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -32,6 +41,11 @@
 <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 
 <script>
+  // var scrollButton = document.getElementById("scrollBtn")
+  // var container = document.getElementById("message-container")
+  // scrollButton.click(function(){
+  //   container.scrollTop(container[0].scrollHeight)
+  // })
   // const socket = io('http://localhost:3001')
 
   function initliazeButtons(){
@@ -163,7 +177,7 @@
 
 <!-- <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script> -->
 <script>
-  var socket = io('https://guarded-meadow-15955.herokuapp.com')
+  var socket = io('http://localhost:3001')
   socket.on('event', function(msg){
       if(msg.state == 'play'){
         if(Math.abs(msg.time - player.getCurrentTime()) > 1){
@@ -176,6 +190,41 @@
 
     }
   )
+</script>
+<script>
+  const messageContainer = document.getElementById('message-container')
+const messageForm = document.getElementById('send-container')
+const messageInput = document.getElementById('message-input')
+
+const name = prompt('What is your name?')
+appendMessage('You joined')
+socket.emit('new-user', name)
+
+socket.on('chat-message', data => {
+  appendMessage(`${data.name}: ${data.message}`)
+})
+
+socket.on('user-connected', name => {
+  appendMessage(`${name} connected`)
+})
+
+socket.on('user-disconnected', name => {
+  appendMessage(`${name} disconnected`)
+})
+
+messageForm.addEventListener('submit', e => {
+  e.preventDefault()
+  const message = messageInput.value
+  appendMessage(`You: ${message}`)
+  socket.emit('send-chat-message', message)
+  messageInput.value = ''
+})
+
+function appendMessage(message) {
+  const messageElement = document.createElement('div')
+  messageElement.innerText = message
+  messageContainer.append(messageElement)
+}
 </script>
 
 </html>

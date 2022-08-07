@@ -66,5 +66,53 @@ body {
     height: 35px;
     border-radius: 10px;
     background-color:#28282B;
+    min-width: 30%;
+    color: white;
+  }
+
+  .main-container {
+    /* display: grid; */
+    /* grid-template-columns: 70% 50%; */
+    display: flex;
+    flex-direction: row;
+  }
+  /* .side-container1 {
+    display: grid;
+    grid-template-columns: 50%;
+  } */
+  .Text-Feature {
+    /* margin-top: 50px; */
+    /* display: grid; */
+    /* grid-template-columns: 50%; */
+    margin-top: 40px;
+    width: 40%;
+    /* margin-left: -50px; */
+    margin-left: 6%;
+    max-height: 350px;
   }
   
+#send-container {
+  /* margin-top: 200px; */
+  max-height: 350px;
+
+  
+}
+
+
+
+  #message-container {
+    min-height: 350px;
+    /* max-height: 350px !important; */
+    scroll-behavior: smooth;
+    background-color: #4f4f4f;
+    color: white;
+    margin-top: 17%;
+    border-radius: 0px 20px 20px 20px;
+  }
+
+
+  /* @media (min-width: 924px){
+    .main-container{
+      display: grid;
+    }
+  } */
