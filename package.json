@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test": "node test.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "socket.io-client": "^4.5.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "test": "^3.2.1"
   }
 }

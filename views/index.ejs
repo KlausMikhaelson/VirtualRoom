@@ -104,7 +104,8 @@
         'disablekb': 1,
         'modestbranding': 1,
         'rel': 0,
-        'showinfo': 0
+        'showinfo': 0,
+        'autoplay': 0
       },
       events: {
         'onReady': onPlayerReady,
@@ -177,7 +178,7 @@
 
 <!-- <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script> -->
 <script>
-  var socket = io('http://localhost:3001')
+  var socket = io('https://fast-peak-14164.herokuapp.com/')
   socket.on('event', function(msg){
       if(msg.state == 'play'){
         if(Math.abs(msg.time - player.getCurrentTime()) > 1){
