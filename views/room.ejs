@@ -39,7 +39,7 @@
   </div>
 </body>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 
@@ -181,7 +181,7 @@
 
 <!-- <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script> -->
 <script>
-  var socket = io(`https://enigmatic-eyrie-24103.herokuapp.com/${roomName}`)
+  var socket = io('https://enigmatic-eyrie-24103.herokuapp.com/')
   socket.on('event', function (msg) {
     if (msg.state == 'play') {
       if (Math.abs(msg.time - player.getCurrentTime()) > 1) {
