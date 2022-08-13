@@ -44,6 +44,9 @@ server.listen(process.env.PORT || 3001, function(){
       rooms[room].users[socket.id] = name
       socket.to(room).emit('user-connected', name)
     })
+    socket.on("event", function(msg) {
+      io.emit("event", msg)
+    })
     socket.on('send-chat-message', (room, message) => {
       socket.to(room).emit('chat-message', { message: message, name: rooms[room].users[socket.id] })
     })
