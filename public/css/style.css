@@ -13,6 +13,7 @@ body {
   margin-left: 10%;
 }
 
+
 #playerController {
   margin-top: 1%;
   display: flex;
@@ -39,6 +40,15 @@ body {
   width: 15px;
   transition: transform .2s;
 }
+
+#playVideo {
+  margin-right: 5px;
+}
+
+#pauseVideo {
+  /* margin: 20px; */
+}
+
 
 #square:hover {
   transform: scale(1.3);
@@ -100,9 +110,21 @@ body {
   max-width: 100%;
 }
 
-#send-container {
-  /* bottom: 100%; */
+#send-container input {
+  height: 40px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  color: black;
 }
+
+#send-container button {
+  margin: 10px;
+  background-color: #3b5998;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+
 
 
 
@@ -117,3 +139,42 @@ body {
       display: grid;
     }
   } */
+
+  /* Index styling */
+
+#room-container {
+  margin: 30px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.room-name {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.input-room {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-room button {
+  margin: 10px;
+  background-color: #3b5998;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.input-room input {
+  height: 40px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+}
+
+.btn-room {
+  font-size: 2rem;
+}

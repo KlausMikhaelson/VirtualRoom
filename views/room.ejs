@@ -3,6 +3,7 @@
   <title>Home Page</title>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L2H7WQ45LP"></script>
+<script src="https://kit.fontawesome.com/e3e687a25f.js" crossorigin="anonymous"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -43,8 +44,8 @@
     <div class="Text-Feature">
       <div id="message-container"></div>
       <form id="send-container">
-        <input type="text" required id="message-input">
-        <button type="submit" id="send-button">Send</button>
+        <input class="msg-input" type="text" required id="message-input">
+        <button class="msg-btn" type="submit" id="send-button">Send</button>
     </div>
   </div>
 </body>
@@ -191,8 +192,8 @@
 
 <!-- <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script> -->
 <script>
-  var socket = io('https://enigmatic-eyrie-24103.herokuapp.com/')
-  socket.on('event', function (msg) {
+  var socket = io('http://localhost:3001/')
+  socket.on('event', (msg) => {
     if (msg.state == 'play') {
       if (Math.abs(msg.time - player.getCurrentTime()) > 1) {
         seekTo(msg.time)
