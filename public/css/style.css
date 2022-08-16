@@ -88,10 +88,8 @@ body {
 }
 
 .main-container {
-  /* display: grid; */
-  /* grid-template-columns: 70% 50%; */
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
 
@@ -99,14 +97,14 @@ body {
 .Text-Feature {
   min-height: 300px;
   scroll-behavior: smooth;
-  background-color: #4f4f4f;
-  color: white;
+  background-color: #aaa9a9;
+  color: black;
   margin-top: 17%;
   border-radius: 0px 20px 20px 20px;
-  margin-top: 40px;
+  margin-top: 108px;
   width: 40%;
-  margin-left: 6%;
-  max-height: 350px;
+  
+  margin-left: 201px;
   max-width: 100%;
 }
 
@@ -133,14 +131,6 @@ body {
   margin-left: 10px;
 }
 
-
-/* @media (min-width: 924px){
-    .main-container{
-      display: grid;
-    }
-  } */
-
-  /* Index styling */
 
 #room-container {
   margin: 30px;
@@ -188,3 +178,32 @@ body {
 .description {
   font-size: 1.5rem;
 }
+
+@media (min-width: 0px) and (max-width: 1000px) {
+
+  .main-container {
+         
+         display: block;
+     } 
+  #player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50vh;
+    margin-left: 0%;
+    margin-right: 60px;
+  }
+  #line {
+    width: 700px;
+  }
+  .Text-Feature {
+    margin-left: 12%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+  }
+  
+ 
+ }
