@@ -178,3 +178,13 @@ body {
 .btn-room {
   font-size: 2rem;
 }
+
+.header {
+  padding-top: 30px;
+  color: white;
+  text-align: center;
+}
+
+.description {
+  font-size: 1.5rem;
+}

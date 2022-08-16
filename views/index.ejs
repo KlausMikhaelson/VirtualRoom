@@ -19,6 +19,13 @@
 <link href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+  <div class="header">
+    <h1>
+      Welcome to Virtual Room
+    </h1>
+    <p class="description">Watch YouTube videos with your friends in virtual room on sync</p>
+    <p class="description">You can either create a room or join one below(if there's any room already created it will reflect the name of it with the join button below)</p>
+  </div>
     <div id="room-container">
         <% Object.keys(rooms).forEach(room => { %>
             <div class="room-name"><%= room %></div>
