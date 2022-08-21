@@ -24,7 +24,7 @@
       Welcome to Virtual Room
     </h1>
     <p class="description">Watch YouTube videos with your friends in virtual room on sync</p>
-    <p class="description">You can either create a room or join one below(if there's any room already created it will reflect the name of it with the join button below)</p>
+    <p class="description">You can either create a room (by entering a random text in the input and click on the "New Room" button) <br> or join one below(if there's any room already created it will reflect the name of it with the "join" button below)</p>
   </div>
     <div id="room-container">
         <% Object.keys(rooms).forEach(room => { %>
@@ -34,7 +34,7 @@
         }) %>
     </div>
     <form class="input-room" action="/room" method="post">
-        <input name="room" type="text" required>
+        <input name="room" placeholder="Create Room" type="text" required>
         <button type="submit">New Room</button>
     </form>
 </body>
