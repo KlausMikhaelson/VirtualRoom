@@ -9,8 +9,8 @@ app.set("view engine", "ejs")
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded ({ extended: true }))
 console.log("Yup worked")
-const rooms = {}
-const users = {}
+const rooms = []
+const users = []
 
 app.get("/", (req, res) => {
     res.render("index", { rooms: rooms })
@@ -20,9 +20,10 @@ app.post("/room", (req, res) => {
   if(rooms[req.body.room] != null) {
     return res.redirect('/')
   }
-  rooms[req.body.room] = { users: {} }
+  rooms[req.body.room] = [users]
+  console.log(users);
   res.redirect(req.body.room)
-  // new room was created
+  // // new room was created
   io.emit('room-created', req.body.room)
 })
 
@@ -41,7 +42,6 @@ server.listen(process.env.PORT || 3001, function(){
   io.on('connection', socket => {
     socket.on('new-user', (room, name) => {
       socket.join(room)
-      rooms[room].users[socket.id] = name
       socket.to(room).emit('user-connected', name)
     })
     socket.on("event", (msg) => {
