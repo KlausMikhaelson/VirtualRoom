@@ -192,7 +192,8 @@
 
 <!-- <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script> -->
 <script>
-  var socket = io('https://dry-spire-28519.herokuapp.com/')
+  // var socket = io('https://dry-spire-28519.herokuapp.com/')
+  var socket = io()
   socket.on('event', (msg) => {
     if (msg.state == 'play') {
       if (Math.abs(msg.time - player.getCurrentTime()) > 1) {
