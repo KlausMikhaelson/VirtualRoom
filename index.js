@@ -17,13 +17,21 @@ app.get("/", (req, res) => {
 })
 
 app.post("/room", (req, res) => {
-  if(rooms[req.body.room] != null) {
-    return res.redirect('/')
-  }
-  rooms[req.body.room] = [users]
-  res.redirect(req.body.room)
-  // new room was created
-  io.emit('room-created', req.body.room)
+  
+  //room name
+  const room = req.body.room
+
+  //check if room exists
+  rooms.filter(roomm=> roomm === room).length === 0?
+
+  //if room doesn't exist insert the room in the rooms' array and redirect to the route of that room
+  rooms.push(room) && res.redirect(room)
+
+  //else redirect to the route of that room
+  :res.redirect(room)
+
+  //new room is created
+  io.emit('room-created',room)
 })
 
 app.get("/:room", (req, res) => {
@@ -49,7 +57,7 @@ server.listen(process.env.PORT || 3001, function(){
   io.on('connection', socket => {
     socket.on('new-user', (room, name) => {
 
-      // it checks if the user already exists
+      //check if the user already exists
       users.filter(user=> user.socketId === socket.id).length === 0 ? 
 
       //if the user doesn't exist then insert it in the users' array and join the room
