@@ -27,10 +27,18 @@ app.post("/room", (req, res) => {
 })
 
 app.get("/:room", (req, res) => {
-  if(rooms[req.params.room] == null) {
-    return res.redirect('/')
-  }
-  res.render("room", { roomName: req.params.room })
+  
+  //room name
+  const room = req.params.room
+  
+  //check if the room exists
+  rooms.filter(roomm => roomm === room).length === 0?
+
+  // if room doesn't exist redirect to home page
+  res.redirect('/')
+
+  //else render the room data
+  :res.render("room", { roomName: room })
 })
 
 server.listen(process.env.PORT || 3001, function(){
@@ -40,8 +48,19 @@ server.listen(process.env.PORT || 3001, function(){
 
   io.on('connection', socket => {
     socket.on('new-user', (room, name) => {
-      socket.join(room)
+
+      // it checks if the user already exists
+      users.filter(user=> user.socketId === socket.id).length === 0 ? 
+
+      //if the user doesn't exist then insert it in the users' array and join the room
+      users.push({socketId: socket.id, username: name}) && socket.join(room)
+      
+      //else join the room
+      : socket.join(room)
+
+      //it sends the userdata to the room when a user is connected
       socket.to(room).emit('user-connected', name)
+
     })
     socket.on("event", (msg) => {
       io.emit("event", msg)
