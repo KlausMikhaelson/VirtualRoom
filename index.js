@@ -57,6 +57,7 @@ server.listen(process.env.PORT || 3001, function(){
   io.on('connection', socket => {
     socket.on('new-user', (room, name) => {
 
+
       //check if the user already exists
       users.filter(user=> user.socketId === socket.id).length === 0 ? 
 
@@ -68,29 +69,33 @@ server.listen(process.env.PORT || 3001, function(){
 
       //it sends the userdata to the room when a user is connected
       socket.to(room).emit('user-connected', name)
-
     })
+
     socket.on("event", (msg) => {
       io.emit("event", msg)
     })
+    
     socket.on('send-chat-message', (room, message) => {
       
       // name of the sender
-      const name = users.filter(user=> user.socketId === socket.id)[0].username;
+      const name = users.filter(user=> user.socketId === socket.id)[0]?.username;
       
       socket.to(room).emit('chat-message', { message: message, name: name})
     })
-    socket.on('disconnect', () => {
-      getUserRooms(socket).forEach(room => {
-        socket.to(room).emit('user-disconnected', rooms[room].users[socket.id])
-        delete rooms[room].users[socket.id]
-      })
+
+    socket.on('disconnecting', () => {
+
+      //name of the user
+      const name = users.filter(user=> user.socketId === socket.id)[0]?.username;
+      
+      //current room of the user
+      const room = Array.from(socket.rooms).filter(room => room !== socket.id)[0];
+
+      socket.to(room).emit('user-disconnected',name)
+      
+    })
+
+    socket.on('disconnect',()=>{
+      io.emit('activeUsers', users)
     })
   })
-  
-  function getUserRooms(socket) {
-    return Object.entries(rooms).reduce((names, [name, room]) => {
-      if (room.users[socket.id] != null) names.push(name)
-      return names
-    }, [])
-  }
