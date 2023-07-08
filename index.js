@@ -9,7 +9,7 @@ app.set("view engine", "ejs")
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded ({ extended: true }))
 console.log("Yup worked")
-const rooms = []
+const rooms = {}
 const users = []
 
 app.get("/", (req, res) => {
@@ -20,10 +20,11 @@ app.post("/room", (req, res) => {
   if(rooms[req.body.room] != null) {
     return res.redirect('/')
   }
-  rooms[req.body.room] = [users]
+  rooms[req.body.room] = { users: [] };
   res.redirect(req.body.room)
   // new room was created
   io.emit('room-created', req.body.room)
+  console.log("Room Created", req.body.room)
 })
 
 app.get("/:room", (req, res) => {

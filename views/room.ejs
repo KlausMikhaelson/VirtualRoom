@@ -192,7 +192,6 @@
 
 <!-- <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script> -->
 <script>
-  // var socket = io('https://dry-spire-28519.herokuapp.com/')
   var socket = io()
   socket.on('event', (msg) => {
     if (msg.state == 'play') {
@@ -212,13 +211,7 @@
   const messageForm = document.getElementById('send-container')
   const messageInput = document.getElementById('message-input')
 
-  let name = '';
-  while (name.trim().length === 0) {
-    name = prompt('What is your name?');
-  }
-
-
-
+  const name = prompt('What is your name?')
   appendMessage('You joined')
   socket.emit('new-user', roomName, name)
 
