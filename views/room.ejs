@@ -24,7 +24,7 @@
   <div class="main-container">
     <div class="side-container1">
       <div id="link-input">
-        <input type="url" id="youtubes" placeholder="paste the videoId">
+        <input type="url" id="youtubes" placeholder="paste the video link">
         <button id="link-Submit" onclick="playAnothervideo()" type="submit">submit</button>
       </div>
       <div id="player"></div>
@@ -186,7 +186,10 @@
 
   function playAnothervideo() {
     var vidId = document.getElementById("youtubes").value;
-    playThisvideo(vidId);
+    if(vidId) {
+      const videoId = vidId.split('v=')[1];
+      playThisvideo(videoId); 
+    }
   }
 </script>
 
