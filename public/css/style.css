@@ -1,9 +1,19 @@
 body {
-  background-color: #28282B;
+  background-color: #D0F5BE;
 }
 
 #link-input {
   margin: 10px;
+}
+.Main-text{
+  font-size: xx-large;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #4C4B16;
+}
+.btn-room:hover{
+  text-decoration: none;
+  transform: scale(1.3);
 }
 
 #player {
@@ -12,7 +22,12 @@ body {
   justify-content: center;
   margin-left: 10%;
 }
-
+.room-name{
+  font-size: larger;
+}
+.new-room-btn{
+  background: #4C4B16;
+}
 
 #playerController {
   margin-top: 1%;
@@ -176,7 +191,12 @@ body {
 }
 
 .description {
-  font-size: 1.5rem;
+  font-size: 0.2rem;
+  font-size: larger;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: #4C4B16;
+  
 }
 
 @media (min-width: 0px) and (max-width: 1000px) {
